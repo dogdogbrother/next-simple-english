@@ -1,0 +1,25 @@
+.swrap {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+.loginBg {
+  width: 70vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center center;
+}
+.bgBox {
+  flex: 1;
+  background-color: red;
+}
+@media (max-width: 760px) {
+  .loginBg {
+    width: 100vw;
+    height: 50vh;
+  }
+  .swrap {
+    flex-direction: column;
+  }
+}
+
