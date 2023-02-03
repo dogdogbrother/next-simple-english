@@ -1,8 +1,22 @@
-body, p, h1, h2, h3, h4 {
+body, p, h1, h2, h3, h4, ul {
   margin: 0;
-  
 }
-
+div, main, section, header, p {
+  box-sizing: border-box;
+}
+ul {
+  padding: 0;
+  list-style: none;
+}
+a, .a {
+  color: #409eff;
+  text-decoration: inherit;
+  cursor: pointer;
+}
+a:hover, .a:hover {
+  color: #66b1ff;
+}
+/*  */
 .flex {
   display: flex;
 }
