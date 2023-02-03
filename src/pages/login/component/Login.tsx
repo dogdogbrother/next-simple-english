@@ -1,6 +1,7 @@
 import styles from '../index.module.scss'
 import { Input, Button, useInput, useToasts } from '@geist-ui/core'
 import { useState } from 'react'
+import { login, register } from '@/request/user'
 
 type inputType = 'secondary' | 'error'
 type ActionType = 'login' | 'register'
@@ -12,7 +13,7 @@ export default function Login() {
   const [ userNameType, setUserNameType ] = useState<inputType>('secondary')
   const [ passwordType, setPasswordType ] = useState<inputType>('secondary')
   const [ _passwordType, _setPasswordType ] = useState<inputType>('secondary')
-  const [action, setAction] = useState<ActionType>('login')
+  const [ action, setAction ] = useState<ActionType>('login')
 
   function resetStatus() {
     resetUserName()
@@ -22,7 +23,6 @@ export default function Login() {
     setPasswordType('secondary')
     _setPasswordType('secondary')
   }
-  // const { state: password, reset: resetPassword, bindings: bindingsPassword } = useInput('')
   const { setToast } = useToasts()
   function onSubmit() {
     // 先把用户名和密码逻辑校验了
@@ -34,9 +34,17 @@ export default function Login() {
         setPasswordType('error')
       }
       // ui库bug,显示不了 待修复 https://github.com/geist-org/geist-ui/issues/814
-      return setToast({text: '用户名或密码不能为空', delay: 100000})
+      return setToast({text: '用户名或密码不能为空', type: 'error'})
     }
-    alert('呜呜呜呜')
+    if (action === 'login') {
+      login({userName, password})
+    } else {
+      if (password !== _password) {
+        _setPasswordType('error')
+        return setToast({text: '密码不一致', type: 'error'})
+      }
+      register({userName, password})
+    }
   }
   function onSwitch() {
     setAction(action === 'login' ? 'register' : 'login')
