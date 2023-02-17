@@ -1,4 +1,4 @@
 export interface UserProps {
-  userName: string,
+  username: string,
   password: string
 }

@@ -2,7 +2,7 @@ import http from './config'
 
 // 用户登录
 export interface LoginProps {
-  userName: string,
+  username: string,
   password: string
 }
 export function login(data: LoginProps) {

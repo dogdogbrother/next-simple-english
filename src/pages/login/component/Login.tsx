@@ -7,28 +7,28 @@ type inputType = 'secondary' | 'error'
 type ActionType = 'login' | 'register'
 
 export default function Login() {
-  const { state: userName, reset: resetUserName, bindings: bindingsUsername } = useInput('')
+  const { state: username, reset: resetusername, bindings: bindingsusername } = useInput('')
   const { state: password, reset: resetPassword, bindings: bindingsPassword } = useInput('')
   const { state: _password, reset: _resetPassword, bindings: _bindingsPassword } = useInput('')
-  const [ userNameType, setUserNameType ] = useState<inputType>('secondary')
+  const [ usernameType, setusernameType ] = useState<inputType>('secondary')
   const [ passwordType, setPasswordType ] = useState<inputType>('secondary')
   const [ _passwordType, _setPasswordType ] = useState<inputType>('secondary')
   const [ action, setAction ] = useState<ActionType>('login')
 
   function resetStatus() {
-    resetUserName()
+    resetusername()
     resetPassword()
     _resetPassword()
-    setUserNameType('secondary')
+    setusernameType('secondary')
     setPasswordType('secondary')
     _setPasswordType('secondary')
   }
   const { setToast } = useToasts()
   function onSubmit() {
     // 先把用户名和密码逻辑校验了
-    if (!userName || !password) {
-      if (!userName) {
-        setUserNameType('error')
+    if (!username || !password) {
+      if (!username) {
+        setusernameType('error')
       }
       if (!password) {
         setPasswordType('error')
@@ -37,13 +37,13 @@ export default function Login() {
       return setToast({text: '用户名或密码不能为空', type: 'error'})
     }
     if (action === 'login') {
-      login({userName, password})
+      login({username, password})
     } else {
       if (password !== _password) {
         _setPasswordType('error')
         return setToast({text: '密码不一致', type: 'error'})
       }
-      register({userName, password})
+      register({username, password})
     }
   }
   function onSwitch() {
@@ -54,7 +54,7 @@ export default function Login() {
     <div className={styles.form}>
       <div>
         <span>用户名</span>
-        <Input size={25} placeholder="请输入用户名" type={userNameType} {...bindingsUsername} onInput={() => setUserNameType('secondary')} />
+        <Input size={25} placeholder="请输入用户名" type={usernameType} {...bindingsusername} onInput={() => setusernameType('secondary')} />
       </div>
       <div>
         <span>密码</span>
